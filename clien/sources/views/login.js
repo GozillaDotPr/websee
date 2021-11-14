@@ -38,21 +38,23 @@ export default class Login extends JetView{
 		var kontek = this;
 
 		if($$('loginForm').validate()){
-			var data= $$('loginForm').getValue();
+			var data= $$('loginForm').getValues();
 			var callbackRes={
 				success:function(response,data,xhr){
 					$$("loginView").enable();
 					response = JSON.parse(response);
-					webix.alert(response.pesan);
-
+					console.log(response)
 					if(response.status){
+						webix.alert(response.msg);
 						webix.storage.session.put('loginNihBos', response.data);
 						$$("loginView").hide();
 						kontek.app.show('/top/start');
+					}else{
+						webix.alert(response.msg);
 					}
 				},
 				error:function(text,data,xhr){
-					webix.alert(text);
+					webix.alert("gagal");
 					$$("loginView").enable();
 					}
 				};

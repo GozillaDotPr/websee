@@ -4,7 +4,7 @@ const pasien= require('../model/pasien');
 const {restrue,resfalse} = require('../config/api');
 
 router.get('/', function(req, res, next) {
-   pasien.findAndCountAll().then(data=>{
+   pasien.findAll().then(data=>{
     restrue("berhasil",true,data,res);
   }).catch(err=>{
     resfalse('error',false,err,res);
@@ -22,7 +22,8 @@ router.post('/tambah', function(req, res, next) {
 
 //update
 router.post('/update', function(req, res, next) {
-  pasien.update(req.body,{where:{id:req.body.id}}).then(data=>{
+    console.log(req.body);
+    pasien.update(req.body,{where:{no_rm:req.body.no_rm}}).then(data=>{
         restrue("berhasil update",true,data,res);
       }).catch(err=>{
         resfalse('error',false,err,res);
@@ -31,7 +32,7 @@ router.post('/update', function(req, res, next) {
 
 //delete
 router.delete('/delete', function(req, res, next) {
-    pasien.destroy({where:{id:req.body.id}}).then(data=>{
+    pasien.destroy({where:{no_rm:req.body.no_rm}}).then(data=>{
         restrue("berhasil delete",true,data,res);
       }).catch(err=>{
         resfalse('error',false,err,res);

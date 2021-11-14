@@ -45,7 +45,7 @@ router.post('/login',function(req,res,next){
             });
         }else{
             res.json({
-                status:true,
+                status:false,
                 msg:"gagal login",
                 data:[],
             });
